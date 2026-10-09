@@ -41,6 +41,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install training dependencies
+        run: python3 -m pip install --upgrade torch torchvision numpy pillow matplotlib scikit-learn
+
       - name: Check Python and GPU
         shell: bash
         run: |
@@ -52,9 +55,6 @@ jobs:
           if torch.cuda.is_available():
               print("GPU:", torch.cuda.get_device_name(0))
           PY
-
-      - name: Install training dependencies
-        run: python3 -m pip install --upgrade numpy pillow matplotlib scikit-learn
 
       - name: Validate dataset structure
         env:
